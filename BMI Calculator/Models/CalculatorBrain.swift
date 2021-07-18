@@ -2,7 +2,7 @@
 //  CalculatorBrain.swift
 //  BMI Calculator
 //
-//  Created by Pavel Paddubotski on 11.07.21.
+//  Created by Pavel Paddubotski on 19.07.21.
 //  Copyright © 2021 Angela Yu. All rights reserved.
 //
 
@@ -10,10 +10,11 @@ import UIKit
 
 struct CalculatorBrain {
     
-    private var bmi: BMI?
+    var bmi: BMI?
     
     func getBMIValue() -> String {
-        return String(format: "%.1f", bmi?.value ?? 0.0)
+        let bmiTo1DecimalPlace = String(format: "%.1f", bmi?.value ?? 0.0)
+        return bmiTo1DecimalPlace
     }
     
     func getAdvice() -> String {
@@ -25,7 +26,8 @@ struct CalculatorBrain {
     }
     
     mutating func calculateBMI(height: Float, weight: Float) {
-        let bmiValue = weight / pow(height, 2)
+        let bmiValue = weight / (height * height)
+
         if bmiValue < 18.5 {
             bmi = BMI(value: bmiValue, advice: "Eat more pies!", color: #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1))
         } else if bmiValue < 24.9 {
